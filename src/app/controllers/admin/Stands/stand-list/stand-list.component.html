@@ -1,0 +1,32 @@
+
+
+
+<mat-card>
+  <mat-card-content>
+
+
+  <mat-tab-group  #tabGroup dynamicHeight  (selectedTabChange)="tabChanged($event)">
+
+
+      <mat-tab  label="Avaliable Stands">
+
+<app-avaliable-stands> </app-avaliable-stands>
+      </mat-tab>
+      <mat-tab  label="Sold Stands"> 
+
+
+      <app-sold-stands></app-sold-stands>
+      </mat-tab>
+
+      
+
+  
+
+ 
+  </mat-tab-group>
+
+</mat-card-content>
+</mat-card>
+
+
+

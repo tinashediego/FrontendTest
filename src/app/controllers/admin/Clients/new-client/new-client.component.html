@@ -1,0 +1,43 @@
+<mat-card class="no-shadow">
+  <mat-card-content>
+  <mat-card-title>Register client</mat-card-title>
+  <form (ngSubmit)="submit()" [formGroup]="clientForm">
+    <mat-form-field>
+      <input matInput placeholder="First name" formControlName="firstname" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Last name" formControlName="lastname"  required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" type="email" formControlName="email" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="National ID" formControlName="nationalId" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone Number" type="number" formControlName="phoneNumber"  required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Address" formControlName="address" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="City" formControlName="city" required>
+    </mat-form-field>
+    <div>
+      <button type="submit" [disabled]="isDisabled" class="btn btn-success">Register</button>
+      <button type="reset" class="btn btn-warning" (click)="closeDialog()">Close</button>
+    </div>
+  </form>
+  <div fxLayout="row" *ngIf="loading==true">
+    <div fxFlex.gt-sm="100%" >
+        <mat-card>
+            <mat-card-content>
+
+              <mat-card-subtitle>please wait while loading</mat-card-subtitle>
+              <mat-progress-bar mode="buffer"></mat-progress-bar>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+  </mat-card-content>
+</mat-card>

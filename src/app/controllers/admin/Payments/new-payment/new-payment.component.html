@@ -1,0 +1,61 @@
+<mat-card class="no-shadow">
+  <mat-card-content>
+  <mat-card-title>New Payment</mat-card-title>
+  <form (ngSubmit)="submit()" [formGroup]="paymentForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Client</mat-label>
+      <mat-select formControlName="client" (ngModelChange)="onChangeTown($event)" >
+        <mat-optgroup >
+          <option [value]="null" disabled>Choose Client</option>
+          <mat-option *ngFor="let client of clients" [value]="client._id">
+            {{client.firstname}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Stand</mat-label>
+      <mat-select formControlName="stand" >
+        <mat-optgroup >
+          <option [value]="null" disabled>Choose Stand</option>
+          <mat-option *ngFor="let stand of stands" [value]="stand?.stand._id">
+            {{stand?.stand.standNumber}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Amount" formControlName="amount" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Payment Type</mat-label>
+      <mat-select formControlName="paymentType" >
+        <mat-optgroup >
+          <mat-option *ngFor="let payment of payments" [value]="payment._id">
+            {{payment.name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field hidden>
+      <input matInput placeholder="Reference Number" formControlName="refenceNumber" required>
+    </mat-form-field>
+    <div>
+      <button type="submit" [disabled]="isDisabled" class="btn btn-success">Register</button>
+      <button type="reset" class="btn btn-warning" (click)="closeDialog()">Close</button>
+    </div>
+  </form>
+  <div fxLayout="row" *ngIf="loading==true">
+    <div fxFlex.gt-sm="100%" >
+        <mat-card>
+            <mat-card-content>
+
+              <mat-card-subtitle>please wait while loading</mat-card-subtitle>
+              <mat-progress-bar mode="buffer"></mat-progress-bar>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+  </mat-card-content>
+</mat-card>

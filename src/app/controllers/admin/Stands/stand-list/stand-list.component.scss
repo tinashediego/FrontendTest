@@ -1,0 +1,31 @@
+table {
+  width: 100%;
+}
+
+.filter {
+  align-self: right;
+  float: right;
+  margin-right: 15px;
+}
+
+th ,h6{
+
+ text-align: center;
+}
+td,mat-chip {
+  border: 2px solid #D1D1D1;
+ text-align: center;
+ vertical-align: middle;
+}
+
+ h2 {
+  font-size: 10px;
+  font-weight: 600;
+  margin: 0px;
+}
+
+.table-heading {
+  border-left: 10px solid #709A68;
+  padding: 0 0 0 8px;
+  font-size: 10px;
+}

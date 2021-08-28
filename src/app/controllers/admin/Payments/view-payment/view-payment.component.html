@@ -1,0 +1,80 @@
+<div *ngIf='!ready'>
+
+  <mat-spinner></mat-spinner>
+
+</div>
+
+<div class="mx-1" *ngIf="ready">
+  <div class="row tm-content-row tm-mt-small">
+      <div class="col-xl-12 col-lg-12 col-md-12">
+          <div class="bg-white tm-block">
+
+              <div class="col-12" id="statement">
+                  <div class="row w-100 d-block d-flex justify-content-center">
+                      <img class="logo" src="./../../../../../assets/logo.png" alt=""></div>
+                      <div
+                          class="row d-block d-flex justify-content-center text-success em-power-txt mt-2">
+                          Lards System
+                      </div>
+
+                      <div class="about d-flex justify-content-center mt-4">
+                         Harare Zimbambwe
+                      </div>
+
+                      <div class="red-line w-100 mt-2"></div>
+                      <div class="row boxes ">
+                          <div class="col-6 ">
+                              <div class="row border mr-2 p-2">
+                                  <!-- <ng-container *ngFor="let payment of payments">
+                    {{payment["standNumber"]}}
+                  </ng-container> -->
+                                  <div class="col-6 font-weight-bold">Stand Number</div>
+                                  <div class="col-6 ">{{stands.standNumber}}</div>
+
+                              </div>
+                          </div>
+                          <div class="col-6 border">
+                              <div class="row  p-2">
+                                  <div class="col-6 font-weight-bold">Reference Number</div>
+                                  <div class="col-6 ">{{reference.refenceNumber}}</div>
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card mt-5">
+                        <div class="card-body">
+                         <table class="table table-sm table-hover table-bordered ">
+                              <thead class="thead-light">
+                                  <tr>
+                                    <th scope="col">Total Cost</th>
+                                    <th scope="col">Amount Paid</th>
+                                    <th scope="col">Area</th>
+                                    <th scope="col">Payment Type</th>
+                                    <th scope="col">Date</th>
+
+                                  </tr>
+                                </thead>
+                            <tbody>
+                              <tr>
+
+                                <td>${{stands.price | number: '.2'}}</td>
+                                <td>${{stands.totalPaid | number: '.2'}}</td>
+                                <td>{{stands.area}}m²</td>
+                                <td>{{paymentTypes.name}}</td>
+                                <td>{{paymentTypes.createdAt| date:'dd/MM/yyyy'}}</td>
+
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="footer">
+                          report Created {{date | date:'dd/MM/yyyy'}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+  </div>

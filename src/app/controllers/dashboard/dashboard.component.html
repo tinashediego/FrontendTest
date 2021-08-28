@@ -1,0 +1,17 @@
+<div class="mb-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+  <div fxFlex  class="inline-block">
+      <app-stat [bgClass]="'danger'" [icon]="'people'" [count]="totals.users" [label]="'Users'"></app-stat>
+  </div>
+  <div fxFlex class="inline-block">
+      <app-stat [bgClass]="'warn'" [icon]="'view_list'" [count]="totals.stands" [label]="'Stands'"></app-stat>
+  </div>
+  <div fxFlex class="inline-block">
+      <app-stat [bgClass]="'success'" [icon]="'shopping_cart'" [count]="totals.clients" [label]="'Clients'"></app-stat>
+  </div>
+  <div fxFlex class="stands">
+      <app-stat [bgClass]="'info'" [icon]="'contact_support'" [count]="stands.avaliable" [label]="'Stands Available'"></app-stat>
+  </div>
+  <div fxFlex class="stands">
+    <app-stat [bgClass]="'info'" [icon]="'contact_support'" [count]="stands.sold" [label]="'Stands Sold'"></app-stat>
+</div>
+</div>

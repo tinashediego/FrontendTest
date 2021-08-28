@@ -1,0 +1,30 @@
+<mat-card class="no-shadow">
+  <mat-card-content>
+  <mat-card-title>Register stand</mat-card-title>
+  <form (ngSubmit)="submit()" [formGroup]="standForm">
+    <mat-form-field>
+      <input matInput placeholder="Stand Number" formControlName="standNumber" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Area square metres" type="number" formControlName="area"  required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Price" type="number" formControlName="price" required>
+    </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="isDisabled"  type="submit"  class="btn  rounded-pill btn-block">Register</button>
+
+  </form>
+  <div fxLayout="row" *ngIf="loading==true">
+    <div fxFlex.gt-sm="100%" >
+        <mat-card>
+            <mat-card-content>
+
+              <mat-card-subtitle>please wait while loading</mat-card-subtitle>
+              <mat-progress-bar mode="buffer"></mat-progress-bar>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+  </mat-card-content>
+</mat-card>

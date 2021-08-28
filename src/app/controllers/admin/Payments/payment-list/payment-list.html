@@ -1,0 +1,93 @@
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Search Payment">
+  </mat-form-field>
+</div>
+<mat-card>
+  <mat-card-content>
+    <h4 style="text-align: center;padding-top:30px">All Payments</h4>
+
+  <button  mat-raised-button   class="btn  rounded-pill shadow-xl" color="primary"  matRipple (click)="newPayment()">New payment</button>
+
+  <table mat-table [dataSource]="dataSource" class="table table-striped vm no-th-brd pro-of-month mb-0 v-middle">
+
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> <h6>No#</h6></th>
+      <td mat-cell *matCellDef="let element let i = index;"> {{i+ 1}} </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef> <h6>Stand Number</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element?.stand.standNumber}} </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef> <h6>Area</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element?.stand.area}}m² </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> <h6>Price</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element?.stand.price | number: '.2'}} </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef> <h6>Total Paid</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element?.stand.totalPaid}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nationalId">
+      <th mat-header-cell *matHeaderCellDef> <h6>Payment Type</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element?.paymentType.name}} </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="updatedAt">
+      <th mat-header-cell *matHeaderCellDef> <h6>Date Created</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element.updatedAt | date:'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="createdBy">
+          <th mat-header-cell *matHeaderCellDef> <h6>Created By</h6> </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdBy?.username}} </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> <h6>Action</h6> </th>
+          <td mat-cell *matCellDef="let element"> <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button (click)="viewPayment(element._id)" mat-menu-item  style="background-color: rgb(39, 5, 77); color: aliceblue;">
+              <span>More Infomation</span>
+            </button>
+            <button mat-menu-item (click)="allPayments(element.refenceNumber)">
+              <span>View Payments by Ref Number</span>
+            </button>
+          </mat-menu>
+          </td>
+        </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+  <div *ngIf="isLoading"
+  style="display: flex; justify-content: center; align-items: center; background: white;">
+ <mat-progress-spinner
+   color="primary"
+   mode="indeterminate">
+ </mat-progress-spinner>
+</div>
+
+<div *ngIf="isData"
+style="display: flex; justify-content: center; align-items: center; background: white;">
+<h1>No Data</h1>
+</div>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</mat-card-content>
+</mat-card>

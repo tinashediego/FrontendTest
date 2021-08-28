@@ -1,0 +1,96 @@
+<div *ngIf='!ready'>
+
+  <mat-spinner></mat-spinner>
+
+</div>
+
+<div class="mx-1" *ngIf="ready">
+  <div class="row tm-content-row tm-mt-small">
+      <div class="col-xl-12 col-lg-12 col-md-12">
+          <div class="bg-white tm-block">
+
+              <div class="col-12" id="statement">
+                  <div class="row w-100 d-block d-flex justify-content-center">
+                      <img class="logo" src="./../../../../../assets/logo.png" alt=""></div>
+                      <div
+                          class="row d-block d-flex justify-content-center text-success em-power-txt mt-2">
+                          Lards System
+                      </div>
+
+                      <div class="about d-flex justify-content-center mt-4">
+                         Harare Zimbambwe
+                      </div>
+                      <div class="email d-flex justify-content-center mt-2 text-muted">
+                          tello@tello.com
+                      </div>
+                      <div class="red-line w-100 mt-2"></div>
+                      <div class="row boxes ">
+                          <div class="col-6 ">
+                              <div class="row border mr-2 p-2">
+                                  <!-- <ng-container *ngFor="let payment of payments">
+                    {{payment["standNumber"]}}
+                  </ng-container> -->
+                                  <div class="col-6 font-weight-bold">First Name</div>
+                                  <div class="col-6 ">{{acc.firstname}}</div>
+                                  <div class="col-6 font-weight-bold">Last Name</div>
+                                  <div class="col-6 ">{{acc.lastname}}</div>
+                                  <div class="col-6 font-weight-bold">Date Created</div>
+                                  <div class="col-6 ">{{acc.createdAt | date:'dd/MM/yyyy'}}</div>
+
+                              </div>
+                          </div>
+                          <div class="col-6 border">
+                              <div class="row  p-2">
+                                  <div class="col-6 font-weight-bold">Physical Address</div>
+                                  <div class="col-6 ">{{acc?.address}}</div>
+                                  <div class="col-6 "></div>
+                                  <div class="col-6 "></div>
+                                  <div class="col-6 font-weight-bold">Mobile Number</div>
+                                  <div class="col-6 ">{{acc.phoneNumber}}</div>
+                                  <div class="col-6 "></div>
+                                  <div class="col-6 "></div>
+                                  <div class="col-6 font-weight-bold">ID Number</div>
+                                  <div class="col-6 ">{{acc.nationalId}}</div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <table class="table table-hover table-striped tm-table-striped-even mt-4">
+                          <thead>
+                              <tr class="tm-bg-gray">
+
+                                  <th scope="col">Stand Number</th>
+                                  <th scope="col">Stand Area</th>
+                                  <th scope="col">Stand Cost</th>
+                                  <th scope="col">Issued Date</th>
+                                  <th scope="col">Change Ownership</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+
+                              <tr *ngFor="let payment of stands">
+                                  <td>{{payment?.stand.standNumber}}</td>
+                                  <td>{{payment?.stand.area}}</td>
+                                  <td>${{payment?.stand.price}}</td>
+                                  <td>{{payment?.updatedAt| date:'dd/MM/yyyy'}}</td>
+
+                                  <td>  <button mat-icon-button class="btn btn-warning" (click)='openDialog(payment.id)'>
+                                    <mat-icon>change_circle</mat-icon>
+                                </button></td>
+
+                                  <td></td>
+                              </tr>
+
+
+                          </tbody>
+                      </table>
+                      <div class="footer">
+                          report Created {{date | date:'dd/MM/yyyy'}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+  </div>
