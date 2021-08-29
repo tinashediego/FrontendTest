@@ -25,40 +25,44 @@ export class RevokePermissionComponent implements OnInit {
   });
 
   constructor(
-  private getStands: GroupService,private alerts: AlertService,
+  private getPermissions: GroupService,private alerts: AlertService,
   private router: Router,public dialogRef: MatDialogRef<RevokePermissionComponent>,
    @Inject(MAT_DIALOG_DATA) public data:any) {}
 
 	ngOnInit() {
-
-    this.getStands.getGroupPermission(this.data.x).subscribe((resp:any)=>{
-      console.log(resp.content)
-      if(resp.content.length>0){
-        this.stands=resp.content;
-        this.isData=false;
-        this.isLoading=false;
-      }else{
-
-        this.isData = true;
-        this.isLoading=false;
+    this.loadPermissions()
       }
-     },err=>{
-       this.loading=false;
-       console.log(err)
-     })
-  }
 
-  assignStandForm() {
+  revokeForm() {
 
    this.loading = true;
-    this.getStands.revokePermission(this.standForm.value).subscribe((res:any)=>{
-      this.alerts.success("Stand assignment successful");
+    this.getPermissions.revokePermission(this.standForm.value).subscribe((res:any)=>{
+      this.alerts.success("Permission revoked");
 
     },(error:any)=>{
       this.loading = false;
       console.log(error)
       this.alerts.error(error)
     })
+
+}
+
+loadPermissions(){
+  this.getPermissions.getGroupPermission(this.data.x).subscribe((resp:any)=>{
+    console.log(resp.content)
+    if(resp.content.length>0){
+      this.stands=resp.content;
+      this.isData=false;
+      this.isLoading=false;
+    }else{
+
+      this.isData = true;
+      this.isLoading=false;
+    }
+   },err=>{
+     this.loading=false;
+     console.log(err)
+   })
 
 }
 

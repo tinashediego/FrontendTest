@@ -1,7 +1,7 @@
 <mat-card class="no-shadow">
   <mat-card-content>
   <mat-card-title>Revoke Permission</mat-card-title>
-  <form (ngSubmit)="assignStandForm()" [formGroup]="standForm">
+  <form (ngSubmit)="revokeForm()" [formGroup]="standForm">
     <div *ngIf="isLoading"
   style="display: flex; justify-content: center; align-items: center; background: white;">
  <mat-progress-spinner

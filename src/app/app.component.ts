@@ -12,7 +12,7 @@ export class AppComponent {
 
 
     this.oauthServicec.configure({
-      tokenEndpoint:`${this.baseUrl}oauth/token`,
+      tokenEndpoint:`${this.baseUrl}/oauth/token`,
        clientId: 'client',
        responseType:'token',
        dummyClientSecret:'Dx6g5Mwy$z2hn@@hSudEER&QRhyF690k',

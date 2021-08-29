@@ -44,7 +44,6 @@ export class EditGroupComponent implements OnInit {
     this.groupForm = new FormGroup({
       description: new FormControl(group.description, Validators.required),
       name: new FormControl(group.name, Validators.required),
-      ownerUuid:new FormControl(group.ownerUuid),
       id:new FormControl(group.id)
       });
   }

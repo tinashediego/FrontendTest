@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
- apiUrl:'https://api.projectafrica.online/api/user-manager/',
+ apiUrl:'https://api.projectafrica.online/api/user-manager',
 //apiUrl:'http://localhost:3000/'
 };
