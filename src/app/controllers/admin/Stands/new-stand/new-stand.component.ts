@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertService, StandService } from '../../../../services';
+import { AlertService, UserService } from '../../../../services';
 
 @Component({
   selector: 'app-new-stand',
@@ -18,7 +18,7 @@ export class NewStandComponent implements OnInit {
   isDisabled:boolean =  false;
 
   standForm: FormGroup
-  constructor(private register: StandService, private alerts: AlertService,private router : Router) {}
+  constructor(private register: UserService, private alerts: AlertService,private router : Router) {}
 
 	ngOnInit() {
 
@@ -51,7 +51,7 @@ export class NewStandComponent implements OnInit {
 
 
         this.loading = true;
-        this.register.register(this.standForm.value).subscribe(res=>{
+        this.register.post(this.standForm.value).subscribe(res=>{
           this.alerts.success("Stand registration successful");
           this.router.navigate(['/stand']);
 

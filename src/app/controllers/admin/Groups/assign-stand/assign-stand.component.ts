@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AlertService, StandService } from '../../../../services';
+import { AlertService, GroupService, UserService } from '../../../../services';
 
 @Component({
   selector: 'app-assign-stand',
@@ -24,14 +24,14 @@ export class AssignStandComponent implements OnInit {
     standId: new FormControl('', Validators.required)
   });
 
-  constructor(private assignStand: StandService,
-  private getStands: StandService,private alerts: AlertService,
+  constructor(private assignStand: UserService,
+  private getStands: GroupService,private alerts: AlertService,
   private router: Router,public dialogRef: MatDialogRef<AssignStandComponent>,
    @Inject(MAT_DIALOG_DATA) public data:any) {}
 
 	ngOnInit() {
 
-    this.getStands.getAvailableStands(false).subscribe((resp:any)=>{
+    this.getStands.getAllGroups().subscribe((resp:any)=>{
       if(resp.length>0){
         this.stands=resp;
         this.isData=false;
@@ -50,7 +50,7 @@ export class AssignStandComponent implements OnInit {
   assignStandForm() {
 
    this.loading = true;
-    this.assignStand.assignStand(this.data.x,this.standForm.value).subscribe((res:any)=>{
+    this.assignStand.getOneUser(this.data.x).subscribe((res:any)=>{
       this.alerts.success("Stand assignment successful");
 
     },(error:any)=>{

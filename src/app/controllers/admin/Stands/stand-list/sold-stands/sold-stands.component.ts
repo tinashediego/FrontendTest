@@ -3,7 +3,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator"
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
-import { StandService } from 'src/app/services';
+import { UserService } from 'src/app/services';
 import { NewStandComponent } from '../../new-stand/new-stand.component';
 import {Component, OnInit, ViewChild } from '@angular/core';
 import { StandPaymentComponent } from '../stand-payment/stand-payment.component';
@@ -23,9 +23,9 @@ export class SoldStandsComponent implements OnInit {
   isData :Boolean =false;
   @ViewChild('tabGroup') tabGroup;
   checkTab:number;
- 
 
-  constructor( public dialog : MatDialog, private router : Router, private getStands: StandService) {}
+
+  constructor( public dialog : MatDialog, private router : Router, private getStands: UserService) {}
 
   applyFilter(filterValue : string) {
       filterValue = filterValue.trim(); // Remove whitespace
@@ -74,7 +74,7 @@ export class SoldStandsComponent implements OnInit {
     this.isLoading = true;
 
 
-    this.getStands.getAvailableStands(true).subscribe((resp:any) => {
+    this.getStands.getActiveUsers().subscribe((resp:any) => {
       console.log(resp)
 
             if(resp.length > 0){
@@ -92,7 +92,7 @@ export class SoldStandsComponent implements OnInit {
 
       })
 
-    
+
 
   }
 

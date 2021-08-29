@@ -10,7 +10,7 @@ export interface Menu {
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'user', type: 'link', name: 'Users', icon: 'people' },
-  { state: 'client', type: 'link', name: 'Clients', icon: 'people' },
+  { state: 'group', type: 'link', name: 'Groups', icon: 'view_comfy' },
   { state: 'stand', type: 'link', name: 'Stands', icon: 'view_comfy'},
   { state: 'payment', type: 'link', name: 'Payments', icon: 'money' },
   { state: 'menu', type: 'link', name: 'Menu', icon: 'view_headline' },

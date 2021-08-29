@@ -32,7 +32,7 @@ export class NewUserComponent implements OnInit {
 
  createUserForm() {
     this.loading = true;
-    this.register.register(this.userForm.value).subscribe(res=>{
+    this.register.post(this.userForm.value).subscribe(res=>{
       this.alerts.success("User registration successful");
       return this.router.navigate(['/user']);
 

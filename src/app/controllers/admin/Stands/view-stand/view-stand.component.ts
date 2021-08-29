@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
-import { StandService } from '../../../../services';
+import { UserService } from '../../../../services';
 
 @Component({
   selector: 'app-view-client',
@@ -17,11 +17,11 @@ export class ViewStandComponent implements OnInit {
   public id:any;
   public details:any;
 
-  constructor(private viewStand: StandService,private router : Router,private route: ActivatedRoute) {}
+  constructor(private viewStand: UserService,private router : Router,private route: ActivatedRoute) {}
 
 	ngOnInit() {
     this.id = this.route.snapshot.params.id;
-    this.viewStand.getOneStand(`${this.id}`).subscribe(resp=>{
+    this.viewStand.getOneUser(`${this.id}`).subscribe(resp=>{
 
       this.details = resp;
       console.log(this.details);

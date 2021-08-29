@@ -4,7 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator"
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
-import { StandService } from 'src/app/services';
+import {  UserService } from 'src/app/services';
 import { NewStandComponent } from '../../new-stand/new-stand.component';
 
 @Component({
@@ -23,9 +23,9 @@ export class AvaliableStandsComponent implements OnInit {
   isData :Boolean =false;
   @ViewChild('tabGroup') tabGroup;
   checkTab:number;
- 
 
-  constructor( public dialog : MatDialog, private router : Router, private getStands: StandService) {}
+
+  constructor( public dialog : MatDialog, private router : Router, private getStands: UserService) {}
 
   applyFilter(filterValue : string) {
       filterValue = filterValue.trim(); // Remove whitespace
@@ -57,7 +57,7 @@ export class AvaliableStandsComponent implements OnInit {
   public loadStands() {
 
     this.isLoading = true;
-      this.getStands.getAvailableStands(false).subscribe((resp:any) => {
+      this.getStands.getActiveUsers().subscribe((resp:any) => {
         console.log(resp)
 
               if(resp.length > 0){

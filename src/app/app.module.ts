@@ -22,6 +22,7 @@ import { AuthGuard } from './helper/auth-guard.service';
 import { AlertService } from './services';
 import { environment } from 'src/environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     SharedModule,
     RouterModule.forRoot(AppRoutes),
-    NgbModule
+    NgbModule,
+    OAuthModule.forRoot({
+      resourceServer:{
+        allowedUrls:[`${environment.apiUrl}`],
+        sendAccessToken:true
+      }
+    })
   ],
   providers: [
       AuthGuard,

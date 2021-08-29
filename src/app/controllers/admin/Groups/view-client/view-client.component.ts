@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router,ActivatedRoute } from '@angular/router';
-import { AlertService, ClientService } from '../../../../services';
+import { AlertService, UserService } from '../../../../services';
 
 @Component({
   selector: 'app-view-client',
@@ -22,11 +22,11 @@ export class ViewClientComponent implements OnInit {
   acc:any;
   stands:any;
   date = new Date()
-  constructor(@Inject(MAT_DIALOG_DATA) public data:any,private viewClient: ClientService,private router : Router,private route: ActivatedRoute) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data:any,private viewClient: UserService,private router : Router,private route: ActivatedRoute) {}
 
 	ngOnInit() {
     this.id = this.route.snapshot.params.id;
-    this.viewClient.getClientStands(`${this.data.id}`).subscribe((resp:any)=>{
+    this.viewClient.getOneUser(`${this.data.id}`).subscribe((resp:any)=>{
 
       console.log(resp)
       this.acc = resp.client;

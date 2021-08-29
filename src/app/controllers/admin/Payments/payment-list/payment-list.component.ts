@@ -4,7 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator"
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
-import { PaymentService } from 'src/app/services';
+import { UserService } from 'src/app/services';
 import { NewPaymentComponent } from '../new-payment/new-payment.component';
 import { ViewPaymentComponent } from '../view-payment/view-payment.component';
 import { AllPaymentsComponent } from '../all-payments/all-payments.component';
@@ -24,7 +24,7 @@ export class PaymentListComponent implements OnInit {
   isData :Boolean =false;
 
 
-  constructor( public dialog : MatDialog, private router : Router, private getPayment: PaymentService) {}
+  constructor( public dialog : MatDialog, private router : Router, private getPayment: UserService) {}
 
   applyFilter(filterValue : string) {
       filterValue = filterValue.trim(); // Remove whitespace
@@ -93,7 +93,7 @@ export class PaymentListComponent implements OnInit {
   public loadPayments() {
 
     this.isLoading = true;
-      this.getPayment.getPayments().subscribe((resp:any) => {
+      this.getPayment.getUsers().subscribe((resp:any) => {
         console.log(resp.content)
               if(resp.content.length > 0){
                 this.dataSource = new MatTableDataSource(resp.content.reverse());

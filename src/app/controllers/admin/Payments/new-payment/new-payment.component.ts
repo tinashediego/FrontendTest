@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ComponentFactoryResolver } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertService, ClientService, PaymentService, StandService } from '../../../../services';
+//import { AlertService, ClientService, PaymentService, StandService } from '../../../../services';
 import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 
@@ -33,17 +33,9 @@ export class NewPaymentComponent implements OnInit {
     refenceNumber: new FormControl(this.randomNum, Validators.required)
   });
 
-  constructor(private addNewPayment: PaymentService, private alerts: AlertService,
-    private router : Router, public dialogRef: MatDialogRef<NewPaymentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:any, private getStands: StandService, private getClients: ClientService) {}
 
 	ngOnInit() {
     this.getAllPaymentTypes();
-    this.getClients.getClients().subscribe((res:any)=>{
-    this.clients = res;
-    },err=>{
-      console.log(err)
-    })
 
     this.paymentForm.value();
 
@@ -56,55 +48,21 @@ export class NewPaymentComponent implements OnInit {
 
 
   getAllPaymentTypes(){
-    this.addNewPayment.getPaymentTypes().subscribe((res:any)=>{
-      this.payments = res;
-      console.log(res)
-    },error=>{
-      console.log(error)
-    })
   }
 
    //in your ts
    onChangeTown(event): void {
-    this.id = event;
-    sessionStorage.setItem('clientId',this.id);
-    console.log('selectedTown: ', this.id);
-
-    let x = sessionStorage.getItem("clientId");
-    console.log(x)
-    this.getClients.getClientStands(x).subscribe((res:any)=>{
-    this.stands = res.stands;
-    console.log(this.stands)
-    },error=>{
-      console.log(error)
-    })
 
   }
 
 
 
   submit(){
-    if(!this.paymentForm.valid){
-      this.alerts.error("Please fill all fields provided");
-    }else{
-
-        this.loading = true;
-        this.addNewPayment.register(this.paymentForm.value).subscribe(res=>{
-          this.alerts.success(" Payment successful");
-          this.isDisabled=true;
-
-        },(error:any)=>{
-          this.loading = false;
-          this.alerts.error(error);
-          this.isDisabled=false;
-        })
-
-    }
   }
 
 
 closeDialog(){
-  this.dialogRef.close();
+  //this.dialogRef.close();
 }
 }
 

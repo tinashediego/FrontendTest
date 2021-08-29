@@ -3,7 +3,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator"
 import {MatSort} from '@angular/material/sort';
 import {Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { PaymentService } from 'src/app/services/payment.service';
+import { UserService } from 'src/app/services';
+//import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
   selector: 'app-stand-payment',
@@ -24,7 +25,7 @@ export class StandPaymentComponent implements OnInit {
   public results:any=[];
   public payments:any;
   public stands:any;
-  constructor( public dialog : MatDialog, private getPayment: PaymentService,public dialogRef: MatDialogRef<StandPaymentComponent>,
+  constructor( public dialog : MatDialog, private getPayment: UserService,public dialogRef: MatDialogRef<StandPaymentComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) {}
 
   applyFilter(filterValue : string) {
@@ -34,7 +35,7 @@ export class StandPaymentComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.loadStandPayments();
 
   }
@@ -46,7 +47,7 @@ export class StandPaymentComponent implements OnInit {
     this.isLoading = true;
 
 
-    this.getPayment.getPaymentStand(this.data.id).subscribe((resp:any) => {
+    this.getPayment.getOneUser(this.data.id).subscribe((resp:any) => {
       this.results.push(resp.result)
       this.stands = this.results.stand
     console.log(this.results)
@@ -65,7 +66,7 @@ export class StandPaymentComponent implements OnInit {
 
       })
 
-    
+
 
   }
 

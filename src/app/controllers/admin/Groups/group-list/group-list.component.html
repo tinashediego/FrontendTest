@@ -5,9 +5,9 @@
 </div>
 <mat-card>
   <mat-card-content>
-    <h4 style="text-align: center;padding-top:30px">All Clients</h4>
+    <h4 style="text-align: center;padding-top:30px">All Groups</h4>
 
-  <button  mat-raised-button   class="btn  rounded-pill shadow-xl" color="primary"  matRipple (click)="newClient()">New client</button>
+  <button  mat-raised-button   class="btn  rounded-pill shadow-xl" color="primary"  matRipple (click)="newGroup()">New group</button>
 
   <table mat-table [dataSource]="dataSource" class="table table-striped vm no-th-brd pro-of-month mb-0 v-middle">
 
@@ -16,41 +16,25 @@
       <td mat-cell *matCellDef="let element let i = index;"> {{i+ 1}} </td>
     </ng-container>
     <!-- Name Column -->
-    <ng-container matColumnDef="firstname">
-      <th mat-header-cell *matHeaderCellDef> <h6>First Name</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> <h6>Description</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
     <!-- Name Column -->
-    <ng-container matColumnDef="lastname">
-      <th mat-header-cell *matHeaderCellDef> <h6>Last Name</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
-    </ng-container>
-    <!-- Name Column -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> <h6>Email</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-    <!-- Name Column -->
-    <ng-container matColumnDef="phoneNumber">
-      <th mat-header-cell *matHeaderCellDef> <h6>Phone Number</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="nationalId">
-      <th mat-header-cell *matHeaderCellDef> <h6>National ID</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.nationalId}} </td>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> <h6>Name</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="updatedAt">
       <th mat-header-cell *matHeaderCellDef> <h6>Date Created</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.updatedAt | date:'dd/MM/yyyy'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.createdDate | date:'dd/MM/yyyy'}} </td>
     </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="createdBy">
           <th mat-header-cell *matHeaderCellDef> <h6>Created By</h6> </th>
-          <td mat-cell *matCellDef="let element"> {{element.createdBy?.username}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
         </ng-container>
         <!-- Symbol Column -->
         <ng-container matColumnDef="action">
@@ -59,11 +43,11 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button (click)="assignStand(element._id)" mat-menu-item class="label label-info label-rounded" style="background-color: rgb(48, 77, 5); color: aliceblue;" >
-              <span>Assign stand</span>
+            <button (click)="editGroup(element.id)" mat-menu-item class="label label-info label-rounded" style="background-color: rgb(90, 109, 61); color: aliceblue;" >
+              <span>Edit group</span>
             </button>
-            <button (click)="viewClient(element._id)" mat-menu-item  style="background-color: rgb(39, 5, 77); color: aliceblue;">
-              <span>More Infomation</span>
+            <button (click)="deleteGroup(element.id)" mat-menu-item  style="background-color: rgb(39, 5, 77); color: aliceblue;">
+              <span>Delete Group</span>
             </button>
             <button mat-menu-item>
               <span>Disable alerts</span>

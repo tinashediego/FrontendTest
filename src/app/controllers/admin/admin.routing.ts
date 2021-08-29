@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 import { StandListComponent } from './Stands/stand-list/stand-list.component';
-import { ClientListComponent } from './Clients/client-list/client-list.component';
-import { ViewClientComponent } from './Clients/view-client/view-client.component';
-import { ViewStandComponent } from './Stands/view-stand/view-stand.component';
+import { GroupListComponent } from './Groups/group-list/group-list.component';
 import { UserListComponent } from './Users/user-list/user-list.component';
 import { PaymentListComponent } from './Payments/payment-list/payment-list.component';
 
@@ -12,20 +10,12 @@ export const AdminRoutes: Routes = [
     component: UserListComponent
   },
   {
-    path: 'client',
-    component:  ClientListComponent
+    path: 'group',
+    component:  GroupListComponent
   },
   {
     path: 'payment',
     component:  PaymentListComponent
-  },
-  {
-    path: 'viewclient/:id',
-    component:  ViewClientComponent
-  },
-  {
-    path: 'viewstand/:id',
-    component:  ViewStandComponent
   },
   {
     path: 'stand',

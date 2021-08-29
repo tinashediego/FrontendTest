@@ -49,12 +49,6 @@ submitForm(){
   this.loading = true;
   this.auth.Login(this.loginForm.value).subscribe((res:any)=>{
 
-    console.log(res)
-    //this.alerts.success("Login successful");
-    sessionStorage.setItem('token',res.token);
-    const decode:any = jwt_decode(res.token);
-    //console.log(decode.username)
-    sessionStorage.setItem('username',decode.username);
     return this.router.navigate(['/dashboard']);
 
   },(error:any)=>{

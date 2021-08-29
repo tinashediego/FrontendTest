@@ -4,7 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator"
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
-import { ClientService } from 'src/app/services';
+import { UserService } from 'src/app/services';
 import { NewUserComponent } from '../new-user/new-user.component';
 
 @Component({
@@ -20,7 +20,7 @@ export class UserListComponent {
   isLoading :Boolean =true;
   isData :Boolean =false;
 
-  constructor( public dialog : MatDialog, private router : Router, private getClient: ClientService) {}
+  constructor( public dialog : MatDialog, private router : Router, private getClient: UserService) {}
 
   applyFilter(filterValue : string) {
       filterValue = filterValue.trim(); // Remove whitespace
@@ -51,7 +51,7 @@ export class UserListComponent {
   public loadClients() {
 
     this.isLoading = true;
-      this.getClient.getClients().subscribe((resp:any) => {
+      this.getClient.getActiveUsers().subscribe((resp:any) => {
 
 
               if(resp.length > 0){

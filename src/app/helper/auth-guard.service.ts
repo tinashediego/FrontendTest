@@ -1,36 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { CanActivate } from '@angular/router';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Router,
+  Route,
+  UrlSegment,
+} from '@angular/router';
+import { Observable } from 'rxjs';
+import { OAuthService } from 'angular-oauth2-oidc';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) {}
+  constructor(private oauthService: OAuthService, private router: Router) {}
 
-  canActivate() {
-    const token = sessionStorage.getItem('token');
-
-    if (token) {
-
-    const token =  sessionStorage.getItem('token')
-
-    if ( token){
-
-      return true
-
-
-    }else{
-
-      sessionStorage.clear()
-      this.router.navigate(['login']);
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    if (!this.oauthService.hasValidAccessToken()) {
+      sessionStorage.clear();
+      this.router.navigate(['/login']);
       return false;
     }
+    return true;
+  }
 
-
-    } else {
-      sessionStorage.clear()
-      this.router.navigate(['login']);
-      return false;
-    }
+  canLoad(
+    route: Route,
+    segments: UrlSegment[]
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    return true;
   }
 }

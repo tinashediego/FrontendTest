@@ -33,10 +33,10 @@ export class GroupService {
         .get(`v1/group/${groupId}`)
 }
 
-putGroup(groupId:String,group:Groups) : Observable < Groups > {
+putGroup(group:Groups) : Observable < Groups > {
   return this
       .apis
-      .put(`v1/groups/${groupId}`,group)
+      .put(`v1/groups/${group.id}`,group)
 }
 
 deleteGroup(groupId:String) : Observable < Groups > {

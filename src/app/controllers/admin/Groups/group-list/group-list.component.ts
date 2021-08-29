@@ -4,19 +4,20 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator"
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
-import { ClientService } from 'src/app/services';
+import { GroupService } from 'src/app/services';
 import { AssignStandComponent } from '../assign-stand/assign-stand.component';
-import { NewClientComponent } from '../new-client/new-client.component';
 import { ViewClientComponent } from '../view-client/view-client.component';
+import { EditGroupComponent } from '../edit-group/edit-group.component';
+import { NewGroupComponent } from '../new-group/new-group.component';
 
 @Component({
-  selector: 'app-client-list',
-  templateUrl: './client-list.component.html',
-  styleUrls: ['./client-list.component.css']
+  selector: 'app-group-list',
+  templateUrl: './group-list.component.html',
+  styleUrls: ['./group-list.component.css']
 })
-export class ClientListComponent implements OnInit {
+export class GroupListComponent implements OnInit {
 
-  displayedColumns : string[] = ['index', 'firstname', 'lastname', 'email','phoneNumber','nationalId','updatedAt' ,'createdBy','action'];
+  displayedColumns : string[] = ['index', 'description', 'name','updatedAt' ,'createdBy','action'];
   dataSource = new MatTableDataSource()
   @ViewChild(MatSort, {static: true})sort :any= MatSort;
   @ViewChild(MatPaginator, {static: true})paginator :any= MatPaginator;
@@ -24,7 +25,7 @@ export class ClientListComponent implements OnInit {
   isData :Boolean =false;
 
 
-  constructor( public dialog : MatDialog, private router : Router, private getClient: ClientService) {}
+  constructor( public dialog : MatDialog, private router : Router, private getGroups: GroupService) {}
 
   applyFilter(filterValue : string) {
       filterValue = filterValue.trim(); // Remove whitespace
@@ -33,14 +34,14 @@ export class ClientListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadClients()
+    this.loadGroups()
 
   }
 
 
 
-  newClient(): void {
-    const dialogRef = this.dialog.open( NewClientComponent , {
+  newGroup(): void {
+    const dialogRef = this.dialog.open( NewGroupComponent , {
       width: '800px',
       height:'600px',
       data: {}
@@ -49,7 +50,7 @@ export class ClientListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
 
-      this.loadClients();
+      this.loadGroups();
     });
   }
 
@@ -68,10 +69,26 @@ export class ClientListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
 
-      this.loadClients();
+      this.loadGroups();
     });
   }
 
+
+
+editGroup(x:String){
+console.log(x)
+    const dialogRef = this.dialog.open( EditGroupComponent , {
+      width: '800px',
+      height:'400px',
+      data: {x}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+      this.loadGroups();
+    });
+  }
 
   assignStand(x:String){
 
@@ -84,17 +101,26 @@ export class ClientListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
 
-      this.loadClients();
+      this.loadGroups();
     });
   }
 
-  public loadClients() {
+
+  deleteGroup(x:string){
+    this.getGroups.deleteGroup(x).subscribe((res:any)=>{
+      console.log(res)
+    },err=>{
+      console.log(err)
+    })
+  }
+
+  public loadGroups() {
 
     this.isLoading = true;
-      this.getClient.getClients().subscribe((resp:any) => {
-
-              if(resp.length > 0){
-                this.dataSource = new MatTableDataSource(resp.reverse());
+      this.getGroups.getGroups().subscribe((resp:any) => {
+console.log(resp)
+              if(resp.content.length > 0){
+                this.dataSource = new MatTableDataSource(resp.content.reverse());
                 this.dataSource.paginator = this.paginator;
                 this.isLoading = false;
                   this.isData = false

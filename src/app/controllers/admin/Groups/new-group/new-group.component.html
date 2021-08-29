@@ -1,0 +1,28 @@
+<mat-card class="no-shadow">
+  <mat-card-content>
+  <mat-card-title>Register group</mat-card-title>
+  <form (ngSubmit)="submit()" [formGroup]="groupForm">
+    <mat-form-field>
+      <input matInput placeholder="Description" formControlName="description" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name"  required>
+    </mat-form-field>
+    <div>
+      <button type="submit" [disabled]="isDisabled" class="btn btn-success">Register</button>
+      <button type="reset" class="btn btn-warning" (click)="closeDialog()">Close</button>
+    </div>
+  </form>
+  <div fxLayout="row" *ngIf="loading==true">
+    <div fxFlex.gt-sm="100%" >
+        <mat-card>
+            <mat-card-content>
+
+              <mat-card-subtitle>please wait while loading</mat-card-subtitle>
+              <mat-progress-bar mode="buffer"></mat-progress-bar>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+  </mat-card-content>
+</mat-card>

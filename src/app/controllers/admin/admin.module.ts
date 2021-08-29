@@ -10,10 +10,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AdminRoutes } from '../admin/admin.routing';
 import { StandListComponent } from './Stands/stand-list/stand-list.component';
 import { UiModule } from 'src/app/ui-components/ui.module';
-import { ClientListComponent } from './Clients/client-list/client-list.component';
-import { NewClientComponent } from './Clients/new-client/new-client.component';
-import { AssignStandComponent } from './Clients/assign-stand/assign-stand.component';
-import { ViewClientComponent } from './Clients/view-client/view-client.component';
+import { GroupListComponent } from './Groups/group-list/group-list.component';
+import { AssignStandComponent } from './Groups/assign-stand/assign-stand.component';
+import { ViewClientComponent } from './Groups/view-client/view-client.component';
 import { ViewStandComponent } from './Stands/view-stand/view-stand.component';
 import { UserListComponent } from './Users/user-list/user-list.component';
 import { NewUserComponent } from './Users/new-user/new-user.component';
@@ -25,6 +24,8 @@ import { PaymentListComponent } from './Payments/payment-list/payment-list.compo
 import { NewPaymentComponent } from './Payments/new-payment/new-payment.component';
 import { AllPaymentsComponent } from './Payments/all-payments/all-payments.component';
 import { ViewPaymentComponent } from './Payments/view-payment/view-payment.component';
+import { EditGroupComponent } from './Groups/edit-group/edit-group.component';
+import { NewGroupComponent } from './Groups/new-group/new-group.component';
 
 @NgModule({
   imports: [
@@ -42,11 +43,11 @@ import { ViewPaymentComponent } from './Payments/view-payment/view-payment.compo
   declarations: [
     StandListComponent,
     PaymentListComponent,
-    NewClientComponent,
+    NewGroupComponent,
     NewPaymentComponent,
     AllPaymentsComponent,
     ViewPaymentComponent,
-    ClientListComponent,
+    GroupListComponent,
     UserListComponent,
     NewUserComponent,
     NewStandComponent,
@@ -55,15 +56,17 @@ import { ViewPaymentComponent } from './Payments/view-payment/view-payment.compo
     AssignStandComponent,
     SoldStandsComponent,
     AvaliableStandsComponent,
-    StandPaymentComponent
+    StandPaymentComponent,
+    EditGroupComponent
   ],
   exports:[
     StandListComponent,
     UserListComponent,
-    ClientListComponent,
+    GroupListComponent,
     PaymentListComponent,
     SoldStandsComponent,
-    AvaliableStandsComponent
+    AvaliableStandsComponent,
+    EditGroupComponent
     ]
 })
 export class AdminsModule {}
