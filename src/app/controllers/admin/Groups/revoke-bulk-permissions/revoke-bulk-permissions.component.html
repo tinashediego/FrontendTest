@@ -17,7 +17,7 @@ style="display: flex; justify-content: center; align-items: center; background: 
 
 <mat-form-field appearance="fill">
   <mat-label>Revoke group permission</mat-label>
-  <mat-select formControlName="groupPermissionId" >
+  <mat-select formControlName="groupPermissionIds" multiple >
     <mat-optgroup >
       <mat-option *ngFor="let groupPermission of groupPermissions" [value]="groupPermission.permission?.id">
         {{groupPermission.permission?.name}}

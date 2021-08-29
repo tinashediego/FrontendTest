@@ -57,4 +57,10 @@ revokeBulkPermission(group:Groups){
   return this.apis.patch(`/v1/group-permissions/revoke-bulk`,group)
 }
 
+assignPermission(group:Groups){
+  return this.apis.post(`/v1/group-permissions`,group)
+}
+assignBulkPermission(group:Groups){
+  return this.apis.post(`/v1/group-permissions/bulk`,group)
+}
 }

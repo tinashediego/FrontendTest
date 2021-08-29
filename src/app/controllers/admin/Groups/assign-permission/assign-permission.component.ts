@@ -1,15 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AlertService, GroupService, UserService } from '../../../../services';
+import { GroupService, AlertService } from 'src/app/services';
+import { RevokePermissionComponent } from '../revoke-permission/revoke-permission.component';
 
 @Component({
-  selector: 'app-revoke-permission',
-  templateUrl: './revoke-permission.component.html',
-  styleUrls: ['./revoke-permission.component.scss']
+  selector: 'app-assign-permission',
+  templateUrl: './assign-permission.component.html',
+  styleUrls: ['./assign-permission.component.css']
 })
-export class RevokePermissionComponent implements OnInit {
+export class AssignPermissionComponent implements OnInit {
 
   color = 'primary';
   mode = 'determinate';
@@ -21,7 +22,7 @@ export class RevokePermissionComponent implements OnInit {
   public groupPermissions:any;
   groupPermissionForm: FormGroup = new FormGroup({
 
-    groupPermissionId: new FormControl('', Validators.required)
+    groupPermissionIds: new FormControl('', Validators.required)
   });
 
   constructor(
@@ -36,8 +37,8 @@ export class RevokePermissionComponent implements OnInit {
   revokeForm() {
 
    this.loading = true;
-    this.getPermissions.revokePermission(this.groupPermissionForm.value).subscribe((res:any)=>{
-      this.alerts.success("Permission revoked");
+    this.getPermissions.assignPermission(this.groupPermissionForm.value).subscribe((res:any)=>{
+      this.alerts.success("Permission assigned");
 
     },(error:any)=>{
       this.loading = false;

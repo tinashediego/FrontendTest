@@ -26,6 +26,9 @@ import { AllPaymentsComponent } from './Payments/all-payments/all-payments.compo
 import { ViewPaymentComponent } from './Payments/view-payment/view-payment.component';
 import { EditGroupComponent } from './Groups/edit-group/edit-group.component';
 import { NewGroupComponent } from './Groups/new-group/new-group.component';
+import { RevokeBulkPermissionsComponent } from './Groups/revoke-bulk-permissions/revoke-bulk-permissions.component';
+import { AssignBulkPermissionsComponent } from './Groups/assign-bulk-permissions/assign-bulk-permissions.component';
+import { AssignPermissionComponent } from './Groups/assign-permission/assign-permission.component';
 
 @NgModule({
   imports: [
@@ -57,7 +60,10 @@ import { NewGroupComponent } from './Groups/new-group/new-group.component';
     SoldStandsComponent,
     AvaliableStandsComponent,
     StandPaymentComponent,
-    EditGroupComponent
+    EditGroupComponent,
+    RevokeBulkPermissionsComponent,
+    AssignBulkPermissionsComponent,
+    AssignPermissionComponent
   ],
   exports:[
     StandListComponent,
@@ -66,7 +72,10 @@ import { NewGroupComponent } from './Groups/new-group/new-group.component';
     PaymentListComponent,
     SoldStandsComponent,
     AvaliableStandsComponent,
-    EditGroupComponent
+    EditGroupComponent,
+    RevokeBulkPermissionsComponent,
+    AssignBulkPermissionsComponent,
+    AssignPermissionComponent
     ]
 })
 export class AdminsModule {}

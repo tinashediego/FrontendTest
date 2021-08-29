@@ -16,8 +16,8 @@ style="display: flex; justify-content: center; align-items: center; background: 
 </div>
 
 <mat-form-field appearance="fill">
-  <mat-label>Revoke group permission</mat-label>
-  <mat-select formControlName="groupPermissionId" >
+  <mat-label>Assign group permission</mat-label>
+  <mat-select formControlName="groupPermissionIds" multiple >
     <mat-optgroup >
       <mat-option *ngFor="let groupPermission of groupPermissions" [value]="groupPermission.permission?.id">
         {{groupPermission.permission?.name}}
@@ -26,7 +26,7 @@ style="display: flex; justify-content: center; align-items: center; background: 
   </mat-select>
 </mat-form-field>
     <div *ngIf="loading==false">
-      <button type="submit" class="btn btn-success">Revoke</button>
+      <button type="submit" class="btn btn-success">Assign</button>
       <button type="reset" class="btn btn-warning" (click)="closeDialog()">Close</button>
     </div>
     <div *ngIf="loading==true">

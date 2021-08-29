@@ -9,6 +9,9 @@ import { RevokePermissionComponent } from '../revoke-permission/revoke-permissio
 import { ViewClientComponent } from '../view-client/view-client.component';
 import { EditGroupComponent } from '../edit-group/edit-group.component';
 import { NewGroupComponent } from '../new-group/new-group.component';
+import { RevokeBulkPermissionsComponent } from '../revoke-bulk-permissions/revoke-bulk-permissions.component';
+import { AssignBulkPermissionsComponent } from '../assign-bulk-permissions/assign-bulk-permissions.component';
+import { AssignPermissionComponent } from '../assign-permission/assign-permission.component';
 
 @Component({
   selector: 'app-group-list',
@@ -84,6 +87,50 @@ console.log(x)
     });
   }
 
+  revokeBulkPermissions(x:String){
+
+    const dialogRef = this.dialog.open( RevokeBulkPermissionsComponent , {
+      width: '800px',
+      height:'400px',
+      data: {x}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+      this.loadGroups();
+    });
+  }
+
+  assignPermission(x:String){
+
+    const dialogRef = this.dialog.open( AssignPermissionComponent , {
+      width: '800px',
+      height:'400px',
+      data: {x}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+      this.loadGroups();
+    });
+  }
+
+  assignBulkPermissions(x:String){
+
+    const dialogRef = this.dialog.open( AssignBulkPermissionsComponent , {
+      width: '800px',
+      height:'400px',
+      data: {x}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+      this.loadGroups();
+    });
+  }
 
   deleteGroup(x:string){
     this.getGroups.deleteGroup(x).subscribe((res:any)=>{

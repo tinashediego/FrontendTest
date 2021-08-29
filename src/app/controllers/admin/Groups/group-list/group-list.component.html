@@ -43,14 +43,23 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button (click)="editGroup(element.id)" mat-menu-item class="label label-info label-rounded" style="background-color: rgb(90, 109, 61); color: aliceblue;" >
+            <button (click)="editGroup(element.id)" mat-menu-item class="label label-info label-rounded" >
               <span>Edit group</span>
             </button>
-            <button (click)="deleteGroup(element.id)" mat-menu-item  style="background-color: rgb(39, 5, 77); color: aliceblue;">
+            <button (click)="deleteGroup(element.id)" mat-menu-item  >
               <span>Delete Group</span>
             </button>
-            <button (click)="revokePermission(element.id)" mat-menu-item  style="background-color: rgb(39, 5, 77); color: aliceblue;">
+            <button (click)="revokePermission(element.id)" mat-menu-item  >
               <span>Revoke Permission</span>
+            </button>
+            <button (click)="assignPermission(element.id)" mat-menu-item  >
+              <span>Assign Permission</span>
+            </button>
+            <button (click)="assignBulkPermissions(element.id)" mat-menu-item  >
+              <span>Assign Bulk Permissions</span>
+            </button>
+            <button (click)="revokeBulkPermissions(element.id)" mat-menu-item >
+              <span>Revoke Bulk Permissions</span>
             </button>
           </mat-menu>
           </td>
