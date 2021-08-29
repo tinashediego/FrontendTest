@@ -1,60 +1,93 @@
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Search User">
+  </mat-form-field>
+</div>
 <mat-card>
   <mat-card-content>
-  <mat-card-title>Users</mat-card-title>
+    <h4 style="text-align: center;padding-top:30px">Users</h4>
 
-  <button mat-raised-button color="accent" (click)="newUser()">New user</button>
+  <button  mat-raised-button   class="btn  rounded-pill shadow-xl" color="primary"  matRipple (click)="newGroup()">New group</button>
 
-  <table mat-table [dataSource]="dataSource" class="table table-striped table-bordered" >
+  <table mat-table [dataSource]="dataSource" class="table table-striped vm no-th-brd pro-of-month mb-0 v-middle">
 
     <ng-container matColumnDef="index">
       <th mat-header-cell *matHeaderCellDef> <h6>No#</h6></th>
       <td mat-cell *matCellDef="let element let i = index;"> {{i+ 1}} </td>
     </ng-container>
     <!-- Name Column -->
-    <ng-container matColumnDef="firstname">
+    <ng-container matColumnDef="firstName">
       <th mat-header-cell *matHeaderCellDef> <h6>First Name</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
     </ng-container>
     <!-- Name Column -->
-    <ng-container matColumnDef="lastname">
+    <ng-container matColumnDef="lastName">
       <th mat-header-cell *matHeaderCellDef> <h6>Last Name</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
     </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="initials">
+      <th mat-header-cell *matHeaderCellDef> <h6>Initials</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element.initials}} </td>
+    </ng-container>
+
     <!-- Name Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> <h6>Email</h6> </th>
       <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
+
     <!-- Name Column -->
     <ng-container matColumnDef="phoneNumber">
       <th mat-header-cell *matHeaderCellDef> <h6>Phone Number</h6> </th>
       <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
     </ng-container>
+
+
     <!-- Name Column -->
-    <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef> <h6>Address</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
-    </ng-container>
-    <!-- Name Column -->
-    <ng-container matColumnDef="city">
-      <th mat-header-cell *matHeaderCellDef> <h6>City</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.city}} </td>
-    </ng-container>
-    <!-- Name Column -->
-    <ng-container matColumnDef="nationalId">
-      <th mat-header-cell *matHeaderCellDef> <h6>National ID</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.nationalId}} </td>
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> <h6>Username</h6> </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="updatedAt">
       <th mat-header-cell *matHeaderCellDef> <h6>Date Created</h6> </th>
-      <td mat-cell *matCellDef="let element"> {{element.updatedAt | date:'dd/MM/yyyy'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.createdDate | date:'dd/MM/yyyy'}} </td>
     </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="createdBy">
           <th mat-header-cell *matHeaderCellDef> <h6>Created By</h6> </th>
-          <td mat-cell *matCellDef="let element"> {{element.createdBy?.username}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> <h6>Action</h6> </th>
+          <td mat-cell *matCellDef="let element"> <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button (click)="editGroup(element.id)" mat-menu-item class="label label-info label-rounded" >
+              <span>Edit group</span>
+            </button>
+            <button (click)="deleteGroup(element.id)" mat-menu-item  >
+              <span>Delete Group</span>
+            </button>
+            <button (click)="revokePermission(element.id)" mat-menu-item  >
+              <span>Revoke Permission</span>
+            </button>
+            <button (click)="assignPermission(element.id)" mat-menu-item  >
+              <span>Assign Permission</span>
+            </button>
+            <button (click)="assignBulkPermissions(element.id)" mat-menu-item  >
+              <span>Assign Bulk Permissions</span>
+            </button>
+            <button (click)="revokeBulkPermissions(element.id)" mat-menu-item >
+              <span>Revoke Bulk Permissions</span>
+            </button>
+          </mat-menu>
+          </td>
         </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

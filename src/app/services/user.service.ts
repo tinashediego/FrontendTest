@@ -36,11 +36,11 @@ export class UserService {
   }
 
   getOneUser(userId:String) : Observable < Users > {
-    return this.apis.get(`/v1/my-users/${userId}/by-owneruuid`)
+    return this.apis.get(`/v1/user/${userId}`)
   }
 
-  updateUserStatus(userId:String,user:Users) : Observable < Users > {
-    return this.apis.patch(`/v1/${userId}/status`,user)
+  updateUserStatus(enabled:boolean,user:Users) : Observable < Users > {
+    return this.apis.patch(`/v1/my-users/${user.id}?active=${enabled}`)
   }
 
   changeUserGroup(userId:String,group:Groups) : Observable < Users > {
@@ -51,8 +51,8 @@ export class UserService {
     return this.apis.delete(`/v1/my-users/${userId}`)
   }
 
-  putUser(userId:String,user:Users) : Observable < Users >{
-    return this.apis.put(`/v1/my-users/${userId}`,user)
+  putUser(user:Users) : Observable < Users >{
+    return this.apis.put(`/v1/my-users/${user.ownerId}`,user)
   }
 
   forgotPassword(user:Users) : Observable < Users >{
