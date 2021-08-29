@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { AlertService, GroupService, UserService } from '../../../../services';
 
 @Component({
-  selector: 'app-assign-stand',
-  templateUrl: './assign-stand.component.html',
-  styleUrls: ['./assign-stand.component.scss']
+  selector: 'app-revoke-permission',
+  templateUrl: './revoke-permission.component.html',
+  styleUrls: ['./revoke-permission.component.scss']
 })
-export class AssignStandComponent implements OnInit {
+export class RevokePermissionComponent implements OnInit {
 
   color = 'primary';
   mode = 'determinate';
@@ -18,22 +18,23 @@ export class AssignStandComponent implements OnInit {
   loading:boolean = false;
   isLoading :Boolean =true;
   isData: Boolean = false;
-  public stands:any=[];
+  public stands:any;
   standForm: FormGroup = new FormGroup({
 
-    standId: new FormControl('', Validators.required)
+    groupPermissionId: new FormControl('', Validators.required)
   });
 
-  constructor(private assignStand: UserService,
+  constructor(
   private getStands: GroupService,private alerts: AlertService,
-  private router: Router,public dialogRef: MatDialogRef<AssignStandComponent>,
+  private router: Router,public dialogRef: MatDialogRef<RevokePermissionComponent>,
    @Inject(MAT_DIALOG_DATA) public data:any) {}
 
 	ngOnInit() {
 
-    this.getStands.getAllGroups().subscribe((resp:any)=>{
-      if(resp.length>0){
-        this.stands=resp;
+    this.getStands.getGroupPermission(this.data.x).subscribe((resp:any)=>{
+      console.log(resp.content)
+      if(resp.content.length>0){
+        this.stands=resp.content;
         this.isData=false;
         this.isLoading=false;
       }else{
@@ -50,7 +51,7 @@ export class AssignStandComponent implements OnInit {
   assignStandForm() {
 
    this.loading = true;
-    this.assignStand.getOneUser(this.data.x).subscribe((res:any)=>{
+    this.getStands.revokePermission(this.standForm.value).subscribe((res:any)=>{
       this.alerts.success("Stand assignment successful");
 
     },(error:any)=>{

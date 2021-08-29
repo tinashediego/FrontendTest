@@ -63,8 +63,12 @@ export class UserService {
     return this.apis.get(`v1/user/${userId}/permissions`)
   }
 
-  revokePermission(){
-    return this.apis.patch(`v1/user-permissions/revoke`)
+  revokePermission(group:Groups){
+    return this.apis.patch(`v1/user-permissions/revoke`,group)
+  }
+
+  revokeBulkPermission(group:Groups){
+    return this.apis.patch(`v1/user-permissions/revoke-bulk`,group)
   }
 
 }

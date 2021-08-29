@@ -1,6 +1,6 @@
 <mat-card class="no-shadow">
   <mat-card-content>
-  <mat-card-title>Assign Stand</mat-card-title>
+  <mat-card-title>Revoke Permission</mat-card-title>
   <form (ngSubmit)="assignStandForm()" [formGroup]="standForm">
     <div *ngIf="isLoading"
   style="display: flex; justify-content: center; align-items: center; background: white;">
@@ -12,21 +12,21 @@
 
 <div *ngIf="isData"
 style="display: flex; justify-content: center; align-items: center; background: white;">
-<h1>No Stands Available</h1>
+<h1>No Permissions Available</h1>
 </div>
 
 <mat-form-field appearance="fill">
-  <mat-label>Assign stand</mat-label>
-  <mat-select formControlName="standId" >
+  <mat-label>Revoke group permission</mat-label>
+  <mat-select formControlName="groupPermissionId" >
     <mat-optgroup >
-      <mat-option *ngFor="let stand of stands" [value]="stand._id">
-        {{stand.standNumber}}
+      <mat-option *ngFor="let stand of stands" [value]="stand.permission?.id">
+        {{stand.permission?.name}}
       </mat-option>
     </mat-optgroup>
   </mat-select>
 </mat-form-field>
     <div *ngIf="loading==false">
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn btn-success">Revoke</button>
       <button type="reset" class="btn btn-warning" (click)="closeDialog()">Close</button>
     </div>
     <div *ngIf="loading==true">

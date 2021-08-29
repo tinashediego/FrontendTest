@@ -11,7 +11,7 @@ import { AdminRoutes } from '../admin/admin.routing';
 import { StandListComponent } from './Stands/stand-list/stand-list.component';
 import { UiModule } from 'src/app/ui-components/ui.module';
 import { GroupListComponent } from './Groups/group-list/group-list.component';
-import { AssignStandComponent } from './Groups/assign-stand/assign-stand.component';
+import { RevokePermissionComponent } from './Groups/revoke-permission/revoke-permission.component';
 import { ViewClientComponent } from './Groups/view-client/view-client.component';
 import { ViewStandComponent } from './Stands/view-stand/view-stand.component';
 import { UserListComponent } from './Users/user-list/user-list.component';
@@ -53,7 +53,7 @@ import { NewGroupComponent } from './Groups/new-group/new-group.component';
     NewStandComponent,
     ViewClientComponent,
     ViewStandComponent,
-    AssignStandComponent,
+    RevokePermissionComponent,
     SoldStandsComponent,
     AvaliableStandsComponent,
     StandPaymentComponent,

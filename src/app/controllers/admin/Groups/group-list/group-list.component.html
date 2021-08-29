@@ -1,6 +1,6 @@
 <div fxLayout fxLayoutAlign="center center">
   <mat-form-field fxFlex="40%">
-    <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Search Client">
+    <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Search Group">
   </mat-form-field>
 </div>
 <mat-card>
@@ -49,8 +49,8 @@
             <button (click)="deleteGroup(element.id)" mat-menu-item  style="background-color: rgb(39, 5, 77); color: aliceblue;">
               <span>Delete Group</span>
             </button>
-            <button mat-menu-item>
-              <span>Disable alerts</span>
+            <button (click)="revokePermission(element.id)" mat-menu-item  style="background-color: rgb(39, 5, 77); color: aliceblue;">
+              <span>Revoke Permission</span>
             </button>
           </mat-menu>
           </td>

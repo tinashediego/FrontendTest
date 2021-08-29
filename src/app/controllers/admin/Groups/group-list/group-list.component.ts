@@ -5,7 +5,7 @@ import {MatPaginator} from "@angular/material/paginator"
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import { GroupService } from 'src/app/services';
-import { AssignStandComponent } from '../assign-stand/assign-stand.component';
+import { RevokePermissionComponent } from '../revoke-permission/revoke-permission.component';
 import { ViewClientComponent } from '../view-client/view-client.component';
 import { EditGroupComponent } from '../edit-group/edit-group.component';
 import { NewGroupComponent } from '../new-group/new-group.component';
@@ -54,27 +54,6 @@ export class GroupListComponent implements OnInit {
     });
   }
 
-
-
-  viewClient(id): void {
-    const dialogRef = this.dialog.open( ViewClientComponent , {
-      width: '1000px',
-      height:'800px',
-      data: {
-
-        id:id
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-      this.loadGroups();
-    });
-  }
-
-
-
 editGroup(x:String){
 console.log(x)
     const dialogRef = this.dialog.open( EditGroupComponent , {
@@ -90,9 +69,9 @@ console.log(x)
     });
   }
 
-  assignStand(x:String){
+  revokePermission(x:String){
 
-    const dialogRef = this.dialog.open( AssignStandComponent , {
+    const dialogRef = this.dialog.open( RevokePermissionComponent , {
       width: '800px',
       height:'400px',
       data: {x}
@@ -135,23 +114,4 @@ console.log(resp)
         })
 
   }
-
-
-/*
-  downloadfifle(y) {
-
-      this
-          .answers
-          .download(y)
-          .subscribe(response=>{
-                    console.log(response)
-              const blob = new Blob([response], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
-              const url= window.URL.createObjectURL(blob);
-              window.open(url);
-
-
-          })
-
-  }
-*/
 }

@@ -33,15 +33,28 @@ export class GroupService {
         .get(`v1/group/${groupId}`)
 }
 
-putGroup(group:Groups) : Observable < Groups > {
+putGroup(group:Groups){
   return this
       .apis
       .put(`v1/groups/${group.id}`,group)
 }
 
-deleteGroup(groupId:String) : Observable < Groups > {
+deleteGroup(groupId:String){
   return this
       .apis
       .delete(`v1/group/${groupId}`)
 }
+
+getGroupPermission(groupId:String) : Observable < Groups >{
+  return this.apis.get(`v1/group/${groupId}/permissions`)
+}
+
+revokePermission(group:Groups){
+  return this.apis.patch(`v1/group-permissions/revoke`,group)
+}
+
+revokeBulkPermission(group:Groups){
+  return this.apis.patch(`v1/group-permissions/revoke-bulk`,group)
+}
+
 }
