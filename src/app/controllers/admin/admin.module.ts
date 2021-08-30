@@ -30,6 +30,8 @@ import { RevokeBulkPermissionsComponent } from './Groups/revoke-bulk-permissions
 import { AssignBulkPermissionsComponent } from './Groups/assign-bulk-permissions/assign-bulk-permissions.component';
 import { AssignPermissionComponent } from './Groups/assign-permission/assign-permission.component';
 import { EditUserComponent } from './Users/edit-user/edit-user.component';
+import { PermissionsComponent } from './Users/permissions/permissions.component';
+import { MoreInfoComponent } from './Users/more-info/more-info.component';
 
 @NgModule({
   imports: [
@@ -65,7 +67,9 @@ import { EditUserComponent } from './Users/edit-user/edit-user.component';
     RevokeBulkPermissionsComponent,
     AssignBulkPermissionsComponent,
     AssignPermissionComponent,
-    EditUserComponent
+    EditUserComponent,
+    PermissionsComponent,
+    MoreInfoComponent
   ],
   exports:[
     StandListComponent,
@@ -78,7 +82,9 @@ import { EditUserComponent } from './Users/edit-user/edit-user.component';
     RevokeBulkPermissionsComponent,
     AssignBulkPermissionsComponent,
     AssignPermissionComponent,
-    EditUserComponent
+    EditUserComponent,
+    PermissionsComponent,
+    MoreInfoComponent
     ]
 })
 export class AdminsModule {}

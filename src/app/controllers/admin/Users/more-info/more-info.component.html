@@ -1,0 +1,120 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title style="border-left:5px solid rgb(45, 0, 128) ; ; margin-left: -10px;">Information System User</mat-card-title>
+
+  </mat-card-header>
+
+  <form *ngIf="ready" [formGroup]="userForm" (ngSubmit)="onSubmit()" class="example-form">
+    <mat-card-content>
+      <mat-form-field class="example-full-width">
+        <input
+          type="text"
+          matInput
+          formControlName="firstName"
+          [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
+          placeholder="Name"
+          readonly
+        
+        />
+        <div *ngIf="submitted && f?.name.errors" class="invalid-feedback">
+          <div *ngIf="f?.name.errors.required">Name is required</div>
+        </div>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input
+          type="text"
+          matInput
+          formControlName="username"
+          [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
+          placeholder="username"
+          readonly
+        
+        />
+        <div *ngIf="submitted && f?.name.errors" class="invalid-feedback">
+          <div *ngIf="f?.name.errors.required">Name is required</div>
+        </div>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+
+        <input
+          type="text"
+          matInput
+          formControlName="lastName"
+          [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
+          placeholder="lastName"
+          readonly
+        
+        />
+      
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
+          placeholder="Email"
+          readonly
+        
+        />
+        <div *ngIf="submitted && f?.supPhone.errors" class="invalid-feedback">
+          <div *ngIf="f?.supPhone.errors.required">Title is required</div>
+        </div>
+      </mat-form-field>
+   
+
+      
+      <mat-form-field class="example-full-width">
+        <input
+          type="text"
+          matInput
+          formControlName="initials"
+          [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
+          placeholder="initials"
+          readonly
+        
+        />
+        <div *ngIf="submitted && f?.name.errors" class="invalid-feedback">
+          <div *ngIf="f?.name.errors.required">Name is required</div>
+        </div>
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width">
+        <input
+          type="number"
+          matInput
+          formControlName="phoneNumber"
+          [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
+          placeholder="phoneNumber"
+          readonly
+        
+        />
+        <div *ngIf="submitted && f?.name.errors" class="invalid-feedback">
+          <div *ngIf="f?.name.errors.required">Name is required</div>
+        </div>
+      </mat-form-field>
+
+
+
+
+   
+
+
+   
+
+    
+      <div>
+        <img
+          *ngIf="loading"
+          class="pl-2"
+          src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        />
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    </mat-card-content>
+    <
+  </form>
+</mat-card>

@@ -33,7 +33,7 @@ export class EditUserComponent implements OnInit {
 
 
     console.log(this.data)
-    this.user.getOneUser(this.data.x).subscribe((resp:Users)=>{
+    this.user.getOneUser(this.data.id).subscribe((resp:Users)=>{
        console.log(resp);
        this.editGroup =resp
       this.createGroup(this.editGroup)
@@ -52,7 +52,7 @@ this.getGroups()
       phoneNumber: new FormControl(user.phoneNumber, Validators.required),
       groupId: new FormControl(user.groupId, Validators.required),
       portalClient: new FormControl(user.portalClient, Validators.required),
-      ownerId:new FormControl(user.ownerId)
+      id:new FormControl(user.id)
       });
   }
 
@@ -63,7 +63,7 @@ this.getGroups()
 
         this.loading = true;
         this.user.putUser(this.groupForm.value).subscribe(res=>{
-          this.alerts.success("Group update successful");
+          this.alerts.success("User update successful");
           this.isDisabled=true;
           this.groupForm.reset()
         },(error:any)=>{

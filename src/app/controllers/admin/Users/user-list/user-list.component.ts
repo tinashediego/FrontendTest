@@ -1,164 +1,229 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from "@angular/material/paginator"
-import {MatSort} from '@angular/material/sort';
-import {Router} from '@angular/router';
+
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from "@angular/material/paginator"
+import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
+import { map } from 'rxjs/operators';
 import { UserService } from 'src/app/services';
 import { NewUserComponent } from '../new-user/new-user.component';
-import { AssignBulkPermissionsComponent } from '../../Groups/assign-bulk-permissions/assign-bulk-permissions.component';
-import { AssignPermissionComponent } from '../../Groups/assign-permission/assign-permission.component';
-import { EditGroupComponent } from '../../Groups/edit-group/edit-group.component';
-import { NewGroupComponent } from '../../Groups/new-group/new-group.component';
-import { RevokeBulkPermissionsComponent } from '../../Groups/revoke-bulk-permissions/revoke-bulk-permissions.component';
-import { RevokePermissionComponent } from '../../Groups/revoke-permission/revoke-permission.component';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { Users } from 'src/app/models';
-
+import { PermissionsComponent } from '../permissions/permissions.component';
+import { MoreInfoComponent } from '../more-info/more-info.component';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent {
-  displayedColumns : string[] = ['index', 'firstName', 'lastName','initials','email','phoneNumber','username','updatedAt' ,'createdBy','action'];
+export class UserListComponent implements OnInit {
+
+
+  displayedColumns: string[] = [
+    'index',
+    'name',
+    'ec',
+    'email',
+    'isVerified',
+    'role',
+    'branch',
+    'delete'
+
+  ];
+  pageEvent: PageEvent;
   dataSource = new MatTableDataSource()
-  @ViewChild(MatSort, {static: true})sort :any= MatSort;
-  @ViewChild(MatPaginator, {static: true})paginator :any= MatPaginator;
-  isLoading :Boolean =true;
-  isData :Boolean =false;
+  total;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  isLoading: Boolean = true;
+  isData: boolean;
+  totalElements:number =  0
+
+  constructor( private userService: UserService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
 
-  constructor( public dialog : MatDialog, private router : Router, private getUsers: UserService) {}
-
-  applyFilter(filterValue : string) {
-      filterValue = filterValue.trim(); // Remove whitespace
-      filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-      this.dataSource.filter = filterValue;
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
+
 
   ngOnInit() {
-    this.loadGroups()
 
+    this.getUsers();
   }
 
 
-  newGroup(): void {
-    const dialogRef = this.dialog.open( NewGroupComponent , {
-      width: '800px',
-      height:'600px',
-      data: {}
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+  public getUsers(){
 
-      this.loadGroups();
-    });
+    this.isLoading =  true;
+     this.userService.findAll(0,5).subscribe((resp:any)=>{
+
+      console.log(resp)
+      if (resp. totalElements >=1) {
+        this.dataSource = new MatTableDataSource(resp.content.reverse());
+        this.dataSource.paginator = this.paginator;
+        this.isLoading = false
+        this.isData = false;
+      } else {
+        this.isLoading = false
+        this.isData = true;
+      }
+
+
+     })
+
+
+
+
   }
 
-editGroup(x:String){
-console.log(x)
-    const dialogRef = this.dialog.open( EditUserComponent , {
-      width: '800px',
-      height:'400px',
-      data: {x}
-    });
+  openDialog(): void {
+   const dialogRef = this
+      .dialog
+      .open(NewUserComponent, {
+        width: '800px',
+        height: '600px',
+        data: {}
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef
+      .afterClosed()
+      .subscribe(result => {
 
-      this.loadGroups();
-    });
+        this.getUsers();
+
+      });
   }
 
-  revokePermission(x:String){
-
-    const dialogRef = this.dialog.open( RevokePermissionComponent , {
-      width: '800px',
-      height:'400px',
-      data: {x}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-      this.loadGroups();
-    });
-  }
-
-  revokeBulkPermissions(x:String){
-
-    const dialogRef = this.dialog.open( RevokeBulkPermissionsComponent , {
-      width: '800px',
-      height:'400px',
-      data: {x}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-      this.loadGroups();
-    });
-  }
-
-  assignPermission(x:String){
-
-    const dialogRef = this.dialog.open( AssignPermissionComponent , {
-      width: '800px',
-      height:'400px',
-      data: {x}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-      this.loadGroups();
-    });
-  }
-
-  assignBulkPermissions(x:String){
-
-    const dialogRef = this.dialog.open( AssignBulkPermissionsComponent , {
-      width: '800px',
-      height:'400px',
-      data: {x}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-      this.loadGroups();
-    });
-  }
-
-  deleteGroup(x:string){
-    this.getUsers.deleteUser(x).subscribe((res:any)=>{
-      console.log(res)
-    },err=>{
-      console.log(err)
-    })
-  }
-
-  public loadGroups() {
-
-    this.isLoading = true;
-      this.getUsers.getUsers().subscribe((resp:any) => {
-console.log(resp)
-              if(resp.content.length > 0){
-                this.dataSource = new MatTableDataSource(resp.content.reverse());
-                this.dataSource.paginator = this.paginator;
-                this.isLoading = false;
-                  this.isData = false
-
-              }else{
-                this.isLoading = false
-                this.isData = true
-
-
+  openEditDialog(id): void {
+     const dialogRef = this.dialog
+          .open(EditUserComponent, {
+              width: '800px',
+              height: '600px',
+              data: {
+                  id: id
               }
+          });
 
-        })
+      dialogRef
+          .afterClosed()
+          .subscribe(result => {
+
+             this.getUsers()
+
+          });
+  }
+
+
+
+  openInfoDialog(id): void {
+    const dialogRef = this.dialog
+         .open(MoreInfoComponent, {
+             width: '800px',
+             height: '600px',
+             data: {
+                 id: id
+             }
+         });
+
+     dialogRef
+         .afterClosed()
+         .subscribe(result => {
+
+            this.getUsers()
+
+         });
+ }
+
+
+
+
+ openPermDialog(id): void {
+  const dialogRef = this.dialog
+       .open(PermissionsComponent, {
+           width: '800px',
+           height: '600px',
+           data: {
+               id: id
+           }
+       });
+
+   dialogRef
+       .afterClosed()
+       .subscribe(result => {
+
+          this.getUsers()
+
+       });
+}
+
+
+
+  del(user_id) {
+
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+
+        this.userService.deleteUser(user_id).subscribe(x => {
+
+            Swal.fire(
+              'Deleted!',
+              'Record has been deleted.',
+              'success'
+            )
+            this.getUsers();
+
+          },
+            err => {
+              this.openSubmitMessage(err, "OK")
+            }
+          )
+
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Record is safe :)',
+          'error'
+        )
+      }
+    })
+
 
   }
+
+
+
+
+  changeStatus(user:Users){
+
+    this.userService.updateUserStatus(user ,!user.enabled).subscribe(resp=>{
+      this.openSubmitMessage('Success' ,'Done')
+    })
+
+
+
+
+
+  }
+
+
+  openSubmitMessage(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+    });
+    // this.closeDialog()
+  }
+
 }
