@@ -12,6 +12,8 @@ import { NewGroupComponent } from '../new-group/new-group.component';
 import { RevokeBulkPermissionsComponent } from '../revoke-bulk-permissions/revoke-bulk-permissions.component';
 import { AssignBulkPermissionsComponent } from '../assign-bulk-permissions/assign-bulk-permissions.component';
 import { AssignPermissionComponent } from '../assign-permission/assign-permission.component';
+import Swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-group-list',
@@ -28,7 +30,7 @@ export class GroupListComponent implements OnInit {
   isData :Boolean =false;
 
 
-  constructor( public dialog : MatDialog, private router : Router, private getGroups: GroupService) {}
+  constructor( public dialog : MatDialog, private _snackBar: MatSnackBar, private getGroups: GroupService) {}
 
   applyFilter(filterValue : string) {
       filterValue = filterValue.trim(); // Remove whitespace
@@ -133,11 +135,48 @@ console.log(x)
   }
 
   deleteGroup(x:string){
-    this.getGroups.deleteGroup(x).subscribe((res:any)=>{
-      console.log(res)
-    },err=>{
-      console.log(err)
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+
+        this.getGroups.deleteGroup(x).subscribe(x => {
+
+            Swal.fire(
+              'Deleted!',
+              'Record has been deleted.',
+              'success'
+            )
+            this.loadGroups()
+
+          },
+            err => {
+              this.openSubmitMessage(err, "OK")
+            }
+          )
+
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Record is safe :)',
+          'error'
+        )
+      }
     })
+
+  }
+
+
+  openSubmitMessage(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+    });
+    // this.closeDialog()
   }
 
   public loadGroups() {

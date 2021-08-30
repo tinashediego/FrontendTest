@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AlertService, GroupService, UserService } from '../../../../services';
 
@@ -21,7 +22,8 @@ export class NewUserComponent implements OnInit {
   ready:boolean = false
 
 
-  constructor(private register: UserService,private groupService:GroupService, private alerts: AlertService,private router : Router) {}
+  constructor(private register: UserService,private groupService:GroupService,
+    public dialogRef: MatDialogRef<NewUserComponent>, private alerts: AlertService,private router : Router) {}
 
 	ngOnInit() {
     this.createUserForm()
@@ -73,6 +75,8 @@ private getGroups (){
 }
 
 
-
+closeDialog(){
+  this.dialogRef.close();
+}
 }
 

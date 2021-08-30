@@ -1,7 +1,7 @@
 
 <mat-card>
   <mat-card-header>
-    <mat-card-title style="border-left:5px solid rgb(45, 0, 128) ; ; margin-left: -10px;">Information System User</mat-card-title>
+    <mat-card-title >User Information</mat-card-title>
 
   </mat-card-header>
 
@@ -15,7 +15,7 @@
           [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
           placeholder="Name"
           readonly
-        
+
         />
         <div *ngIf="submitted && f?.name.errors" class="invalid-feedback">
           <div *ngIf="f?.name.errors.required">Name is required</div>
@@ -30,7 +30,7 @@
           [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
           placeholder="username"
           readonly
-        
+
         />
         <div *ngIf="submitted && f?.name.errors" class="invalid-feedback">
           <div *ngIf="f?.name.errors.required">Name is required</div>
@@ -45,9 +45,9 @@
           [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
           placeholder="lastName"
           readonly
-        
+
         />
-      
+
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input
@@ -57,15 +57,15 @@
           [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
           placeholder="Email"
           readonly
-        
+
         />
         <div *ngIf="submitted && f?.supPhone.errors" class="invalid-feedback">
           <div *ngIf="f?.supPhone.errors.required">Title is required</div>
         </div>
       </mat-form-field>
-   
 
-      
+
+
       <mat-form-field class="example-full-width">
         <input
           type="text"
@@ -74,13 +74,13 @@
           [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
           placeholder="initials"
           readonly
-        
+
         />
         <div *ngIf="submitted && f?.name.errors" class="invalid-feedback">
           <div *ngIf="f?.name.errors.required">Name is required</div>
         </div>
       </mat-form-field>
-      
+
       <mat-form-field class="example-full-width">
         <input
           type="number"
@@ -89,7 +89,7 @@
           [ngClass]="{ 'is-invalid': submitted && f?.title.errors }"
           placeholder="phoneNumber"
           readonly
-        
+
         />
         <div *ngIf="submitted && f?.name.errors" class="invalid-feedback">
           <div *ngIf="f?.name.errors.required">Name is required</div>
@@ -99,12 +99,12 @@
 
 
 
-   
 
 
-   
 
-    
+
+
+
       <div>
         <img
           *ngIf="loading"
@@ -115,6 +115,6 @@
 
       <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
     </mat-card-content>
-    <
+    
   </form>
 </mat-card>

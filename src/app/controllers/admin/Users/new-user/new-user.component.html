@@ -50,7 +50,9 @@
     </mat-form-field>
 
     <div>
+
       <button mat-raised-button color="primary" type="submit">Register</button>
+      <button type="reset" class="btn btn-warning" (click)="closeDialog()">Close</button>
     </div>
   </form>
   <div fxLayout="row" *ngIf="loading==true">
