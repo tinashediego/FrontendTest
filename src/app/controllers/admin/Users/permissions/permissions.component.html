@@ -1,25 +1,38 @@
 
-<h1>User Permmissions`</h1>
+
+<mat-card class="no-shadow">
+  <mat-card-content>
+  <mat-card-title>User Permission</mat-card-title>
 
 
-<div *ngIf="ready">
+<mat-form-field appearance="fill">
+  <mat-label>Assign user permission</mat-label>
+  <mat-select formControlName="groupPermissionId" >
+    <mat-optgroup *ngIf="ready">
+      <mat-option *ngFor="let link of pemGroup">
+        <a matLine href="...">{{ link.name }}</a>
+        <button class="btn btn-primary btn-sm"  (click)="assignPem(link.id)"
+       >Assign user permission</button>
+     </mat-option>
+    </mat-optgroup>
+  </mat-select>
+</mat-form-field>
 
-  <mat-nav-list>  
-    <mat-list-item *ngFor="let link of pemGroup">  
-       <a matLine href="...">{{ link.name }}</a>  
-       <button class="btn btn-success btn-sm"  (click)="assignPem(link.id)"
-      >Assign</button>
-    </mat-list-item>  
-  </mat-nav-list>  
-  
-  
-  
-  <mat-nav-list>  
-    <mat-list-item *ngFor="let link of needRevoke">  
-       <a matLine href="...">{{ link?.permission?.name }}</a>  
-       <button class="btn btn-danger btn-sm"  (click)="RevokeSomePem(link.id)"
-      >Revoke</button>
-    </mat-list-item>  
-  </mat-nav-list>  
 
-</div>
+<mat-form-field appearance="fill">
+  <mat-label>Revoke user permission</mat-label>
+  <mat-select formControlName="groupPermissionId" >
+    <mat-optgroup *ngIf="ready" >
+      <mat-option *ngFor="let link of needRevoke">
+        <a matLine href="...">{{ link?.permission?.name }}</a>
+        <button class="btn btn-warning btn-sm"  (click)="RevokeSomePem(link.id)"
+       >Revoke user permission</button>
+     </mat-option>
+
+    </mat-optgroup>
+  </mat-select>
+</mat-form-field>
+
+
+  </mat-card-content>
+</mat-card>

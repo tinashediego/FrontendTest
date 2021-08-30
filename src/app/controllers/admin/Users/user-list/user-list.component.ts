@@ -26,7 +26,6 @@ export class UserListComponent implements OnInit {
     'name',
     'ec',
     'email',
-    'isVerified',
     'role',
     'branch',
     'delete'
@@ -146,7 +145,7 @@ export class UserListComponent implements OnInit {
  openPermDialog(id): void {
   const dialogRef = this.dialog
        .open(PermissionsComponent, {
-           width: '800px',
+           width: '1500px',
            height: '600px',
            data: {
                id: id
@@ -170,8 +169,8 @@ export class UserListComponent implements OnInit {
       title: 'Are you sure?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
+      confirmButtonText: 'Continue',
+      cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.value) {
 
@@ -179,24 +178,17 @@ export class UserListComponent implements OnInit {
 
             Swal.fire(
               'Deleted!',
-              'Record has been deleted.',
+              'Delete successful',
               'success'
             )
             this.getUsers();
 
-          },
-            err => {
-              this.openSubmitMessage(err, "OK")
-            }
+          }
           )
 
 
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Record is safe :)',
-          'error'
-        )
+
       }
     })
 
@@ -209,7 +201,7 @@ export class UserListComponent implements OnInit {
   changeStatus(user:Users){
 
     this.userService.updateUserStatus(user ,!user.enabled).subscribe(resp=>{
-      this.openSubmitMessage('Success' ,'Done')
+      //this.openSubmitMessage('Success' ,'Done')
     })
 
 

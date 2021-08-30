@@ -139,8 +139,8 @@ console.log(x)
       title: 'Are you sure?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
+      confirmButtonText: 'Continue',
+      cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.value) {
 
@@ -148,24 +148,21 @@ console.log(x)
 
             Swal.fire(
               'Deleted!',
-              'Record has been deleted.',
+              'Delete successful',
               'success'
             )
             this.loadGroups()
 
           },
-            err => {
-              this.openSubmitMessage(err, "OK")
-            }
           )
 
 
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
+        /*Swal.fire(
           'Cancelled',
-          'Record is safe :)',
+          'Delete Cancelled :)',
           'error'
-        )
+        )*/
       }
     })
 

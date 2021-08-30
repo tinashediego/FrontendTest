@@ -22,7 +22,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>
-        <h6>User Name</h6>
+        <h6>Username</h6>
       </th>
       <td mat-cell *matCellDef="let element">{{ element.username }}</td>
     </ng-container>
@@ -39,28 +39,6 @@
         <h6>Email</h6>
       </th>
       <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-    </ng-container>
-    <ng-container matColumnDef="isVerified">
-      <th mat-header-cell *matHeaderCellDef>
-        <h6>Status</h6>
-      </th>
-      <td mat-cell *matCellDef="let element">
-        <span
-          *ngIf="element?.enabled == true"
-          class="label label-info label-rounded"
-          style="background-color: green"
-        >
-          {{ element?.enabled}}
-        </span>
-
-        <span
-          *ngIf="element?.enabled== false"
-          class="label label-info label-rounded"
-          style="background-color: rgb(214, 10, 10)"
-        >
-          {{ element?.enabled }}
-        </span>
-      </td>
     </ng-container>
 
     <ng-container matColumnDef="role">
@@ -92,9 +70,6 @@
             </button>
             <button (click)="changeStatus(element)" mat-menu-item  >
               <span>Activate/Deactivate</span>
-            </button>
-            <button (click)="openInfoDialog(element.id)" mat-menu-item  >
-              <span>More Info</span>
             </button>
             <button (click)="openPermDialog(element.id)" mat-menu-item  >
               <span>Assign Bulk Permissions</span>
