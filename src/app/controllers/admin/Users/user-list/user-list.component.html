@@ -7,9 +7,9 @@
 </div>
 <mat-card>
   <mat-card-content>
-    <h4 style="text-align: center;padding-top:30px">All Users</h4>
+    <h4 style="text-align: left;padding-top:30px">All Users</h4>
 
-  <button  mat-raised-button   class="btn  rounded-pill shadow-xl" color="primary"  matRipple (click)="openDialog()">New user</button>
+  <button class="btn btn-success" (click)="openDialog()">New user</button>
 
   <table mat-table [dataSource]="dataSource" class="table table-striped vm no-th-brd pro-of-month mb-0 v-middle">
 
