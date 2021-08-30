@@ -36,16 +36,6 @@ export class AssignBulkPermissionsComponent implements OnInit {
 
   revokeForm() {
 
-   this.loading = true;
-    this.getPermissions.assignBulkPermission(this.groupPermissionForm.value).subscribe((res:any)=>{
-      this.alerts.success("Permission assigned");
-
-    },(error:any)=>{
-      this.loading = false;
-      console.log(error)
-      this.alerts.error(error)
-    })
-
 }
 
 loadPermissions(){

@@ -36,16 +36,6 @@ export class RevokeBulkPermissionsComponent implements OnInit {
 
   revokeForm() {
 
-   this.loading = true;
-    this.getPermissions.revokeBulkPermission(this.groupPermissionForm.value).subscribe((res:any)=>{
-      this.alerts.success("Permission revoked");
-
-    },(error:any)=>{
-      this.loading = false;
-      console.log(error)
-      this.alerts.error(error)
-    })
-
 }
 
 loadPermissions(){

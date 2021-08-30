@@ -1,50 +1,25 @@
-<mat-card class="no-shadow">
-  <mat-card-content>
-  <mat-card-title>Revoke Permission</mat-card-title>
-  <form (ngSubmit)="revokeForm()" [formGroup]="groupPermissionForm">
-    <div *ngIf="isLoading"
-  style="display: flex; justify-content: center; align-items: center; background: white;">
- <mat-progress-spinner
-   color="primary"
-   mode="indeterminate">
- </mat-progress-spinner>
+
+<h1>Group Permmissions</h1>
+
+
+<div *ngIf="ready">
+
+  <mat-nav-list>
+    <mat-list-item *ngFor="let link of pemGroup">
+       <a matLine href="...">{{ link.name }}</a>
+       <button class="btn btn-success btn-sm"  (click)="assignPem(link.id)"
+      >Assign</button>
+    </mat-list-item>
+  </mat-nav-list>
+
+
+
+  <mat-nav-list>
+    <mat-list-item *ngFor="let link of needRevoke">
+       <a matLine href="...">{{ link?.permission?.name }}</a>
+       <button class="btn btn-danger btn-sm"  (click)="RevokeSomePem(link.id)"
+      >Revoke</button>
+    </mat-list-item>
+  </mat-nav-list>
+
 </div>
-
-<div *ngIf="isData"
-style="display: flex; justify-content: center; align-items: center; background: white;">
-<h1>No Permissions Available</h1>
-</div>
-
-<mat-form-field appearance="fill">
-  <mat-label>Assign group permission</mat-label>
-  <mat-select formControlName="groupPermissionId" >
-    <mat-optgroup >
-      <mat-option *ngFor="let groupPermission of groupPermissions" [value]="groupPermission.permission?.id">
-        {{groupPermission.permission?.name}}
-      </mat-option>
-    </mat-optgroup>
-  </mat-select>
-</mat-form-field>
-    <div *ngIf="loading==false">
-      <button type="submit" class="btn btn-success">Assign</button>
-      <button type="reset" class="btn btn-warning" (click)="closeDialog()">Close</button>
-    </div>
-    <div *ngIf="loading==true">
-      <button mat-raised-button [disabled]="true" color="primary">Submit</button>
-      <button type="reset" class="btn btn-warning" (click)="closeDialog()">Close</button>
-    </div>
-
-  </form>
-  <div fxLayout="row" *ngIf="loading==true">
-    <div fxFlex.gt-sm="100%" >
-        <mat-card>
-            <mat-card-content>
-
-              <mat-card-subtitle>please wait while loading</mat-card-subtitle>
-              <mat-progress-bar mode="buffer"></mat-progress-bar>
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>
-  </mat-card-content>
-</mat-card>

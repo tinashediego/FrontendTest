@@ -45,22 +45,38 @@ deleteGroup(groupId:String){
       .delete(`/v1/group/${groupId}`)
 }
 
-getGroupPermission(groupId:String) : Observable < Groups >{
-  return this.apis.get(`/v1/group/${groupId}/permissions`)
+getGroupPermission(userId:string) : Observable < Groups >{
+  return this.apis.get(`/v1/group/${userId}/permissions`)
 }
 
-revokePermission(group:Groups){
-  return this.apis.patch(`/v1/group-permissions/revoke`,group)
+revokePermission(){
+  return this.apis.patch(`/v1/group-permissions/revoke`)
+}
+getUnassginedPermissions(userId){
+
+  return this.apis.get(`/v1/group-permissions/unassigned/${userId}`)
+
 }
 
-revokeBulkPermission(group:Groups){
-  return this.apis.patch(`/v1/group-permissions/revoke-bulk`,group)
+
+getAssgiendPermissions(userId){
+
+  return this.apis.get(`/v1/group/${userId}/permissions/all`)
+
 }
 
-assignPermission(group:Groups){
-  return this.apis.post(`/v1/group-permissions`,group)
+
+
+assignPem(userID ,pemid){
+
+   return this.apis.post(`/v1/group-permissions?permissionId=${pemid}&groupId=${userID}`,{})
 }
-assignBulkPermission(group:Groups){
-  return this.apis.post(`/v1/group-permissions/bulk`,group)
-}
+
+
+
+ revokeIt(permId){
+
+
+ return this.apis.post(`/v1/group-permissions/revoke?groupPermissionId=${permId}`,{})
+ }
 }

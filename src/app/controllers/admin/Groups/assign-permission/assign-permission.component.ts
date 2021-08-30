@@ -1,9 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { GroupService, AlertService } from 'src/app/services';
-import { RevokePermissionComponent } from '../revoke-permission/revoke-permission.component';
 
 @Component({
   selector: 'app-assign-permission',
@@ -12,64 +9,66 @@ import { RevokePermissionComponent } from '../revoke-permission/revoke-permissio
 })
 export class AssignPermissionComponent implements OnInit {
 
-  color = 'primary';
-  mode = 'determinate';
-  value = 50;
-  bufferValue = 75;
-  loading:boolean = false;
-  isLoading :Boolean =true;
-  isData: Boolean = false;
-  public groupPermissions:any;
-  groupPermissionForm: FormGroup = new FormGroup({
+  pemGroup:any =[]
+  needRevoke:any =[]
+  ready:boolean = false
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any , public dialog : MatDialog, private userService:GroupService ,private  alertService:AlertService) { }
 
-    groupPermissionIds: new FormControl('', Validators.required)
-  });
+  ngOnInit() {
 
-  constructor(
-  private getPermissions: GroupService,private alerts: AlertService,
-  private router: Router,public dialogRef: MatDialogRef<RevokePermissionComponent>,
-   @Inject(MAT_DIALOG_DATA) public data:any) {}
+    this.gethemAll();
 
-	ngOnInit() {
-    this.loadPermissions()
-      }
 
-  revokeForm() {
+  }
 
-   this.loading = true;
-    this.getPermissions.assignPermission(this.groupPermissionForm.value).subscribe((res:any)=>{
-      this.alerts.success("Permission assigned");
 
-    },(error:any)=>{
-      this.loading = false;
-      console.log(error)
-      this.alerts.error(error)
+
+  gethemAll(){
+
+    this.userService.getAssgiendPermissions(this.data.x).subscribe((resp:any)=>{
+
+      console.log(resp)
+
+      this.needRevoke = resp.sort()
+   });
+
+    this.userService.getUnassginedPermissions(this.data.x).subscribe((resps:any)=>{
+
+     this.pemGroup = resps.sort()
+
+     console.log(resps)
+
+     this.ready = true;
     })
 
+
+
+  }
+
+  RevokeSomePem(x){
+    this.userService.revokeIt(x).subscribe(resp=>{
+
+      this.gethemAll();
+    },err=>{
+console.log(err.error)
+
+       this.alertService.error(err.error.error ||err.error.message )
+
+    })
+
+  }
+
+  assignPem(x){
+  this.userService.assignPem(this.data.x ,x).subscribe(resp=>{
+    this.gethemAll();
+  },err=>{
+    console.log(err.error)
+
+           this.alertService.error(err.error.error ||err.error.message)
+
+        })
+  }
+
 }
 
-loadPermissions(){
-  this.getPermissions.getGroupPermission(this.data.x).subscribe((resp:any)=>{
-    console.log(resp.content)
-    if(resp.content.length>0){
-      this.groupPermissions=resp.content;
-      this.isData=false;
-      this.isLoading=false;
-    }else{
-
-      this.isData = true;
-      this.isLoading=false;
-    }
-   },err=>{
-     this.loading=false;
-     console.log(err)
-   })
-
-}
-
-closeDialog(){
-  this.dialogRef.close();
-}
-
-}
 
