@@ -68,8 +68,11 @@
             <button (click)="del(element.id)" mat-menu-item  >
               <span>Delete Group</span>
             </button>
-            <button (click)="changeStatus(element)" mat-menu-item  >
-              <span>Activate/Deactivate</span>
+            <button style="background-color: red; color: white;" *ngIf="element.enabled==true" (click)="changeStatus(element)" mat-menu-item  >
+              <span>Deactivate</span>
+            </button>
+            <button style="background-color: green; color: white;" *ngIf="element.enabled==false" (click)="changeStatus(element)" mat-menu-item  >
+              <span>Activate</span>
             </button>
             <button (click)="openPermDialog(element.id)" mat-menu-item  >
               <span>Assign Bulk Permissions</span>
